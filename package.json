@@ -1,6 +1,6 @@
 {
   "name": "vfis",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The make fis3 to support vue、es6 and make it more easy !",
   "main": "index.js",
   "scripts": {
