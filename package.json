@@ -1,0 +1,35 @@
+{
+  "name": "vfis",
+  "version": "0.1.0",
+  "description": "The make fis3 to support vue、es6 and make it more easy !",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lpreterite/vfis.git"
+  },
+  "author": "packy-tang <lpreterite@126.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lpreterite/vfis/issues"
+  },
+  "homepage": "https://github.com/lpreterite/vfis#readme",
+  "dependencies": {
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-es2016": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-3": "^6.17.0",
+    "fis-parser-babel-6.x": "^6.20.0",
+    "fis-parser-node-sass": "^0.2.1",
+    "fis3": "^3.4.31",
+    "fis3-hook-commonjs": "^0.1.26",
+    "fis3-packager-deps-pack": "^0.1.2",
+    "fis3-parser-vue-component": "^3.0.1",
+    "fis3-postpackager-loader": "^2.1.4",
+    "fis3-postprocessor-autoprefixer": "^1.0.0",
+    "fis3-preprocessor-js-require-file": "^0.1.3",
+    "fis3-preprocessor-js-require-css": "^0.1.1"
+  }
+}
