@@ -1,25 +1,15 @@
 {
-  "name": "vfis",
-  "version": "0.1.2",
-  "description": "The make fis3 to support vue、es6 and make it more easy !",
-  "main": "index.js",
-  "scripts": {
-    "test": "fis3 release -d ./test/output -f ./test/fis-conf.js"
-  },
-  "bin": {
-    "vfis": "bin/vfis.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lpreterite/vfis.git"
-  },
-  "author": "packy-tang <lpreterite@126.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/lpreterite/vfis/issues"
-  },
-  "homepage": "https://github.com/lpreterite/vfis#readme",
+  "name": "fis-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fis-conf.js",
   "dependencies": {
+    "bluebird": "^3.4.7",
+    "process": "^0.11.9",
+    "requirejs": "^2.3.2",
+    "vue": "^1.0.25"
+  },
+  "devDependencies": {
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-es2016": "^6.16.0",
     "babel-preset-react": "^6.16.0",
@@ -34,5 +24,12 @@
     "fis3-postprocessor-autoprefixer": "^1.0.0",
     "fis3-preprocessor-js-require-file": "^0.1.3",
     "fis3-preprocessor-js-require-css": "^0.1.1"
-  }
+  },
+  "scripts": {
+    "dev": "fis3 release -d ./output",
+    "publish": "fis3 release -d ./output",
+    "server": "fis3 server start -p 1088 --root ./output"
+  },
+  "author": "packy-tang <lpreterite@126.com>",
+  "license": "MIT"
 }
