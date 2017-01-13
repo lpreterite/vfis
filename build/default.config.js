@@ -1,5 +1,5 @@
 module.exports = exports.defaults = {
-    input: 'pages/**/(*.html)',
+    input: '**/(*.html)',
     output: {
         default: {
             basePath: 'assets',

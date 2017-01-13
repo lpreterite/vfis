@@ -5,6 +5,7 @@
   "main": "fis-conf.js",
   "dependencies": {
     "bluebird": "^3.4.7",
+    "normalize-css": "^2.3.1",
     "process": "^0.11.9",
     "requirejs": "^2.3.2",
     "vue": "^1.0.25"
@@ -26,8 +27,8 @@
     "fis3-preprocessor-js-require-css": "^0.1.1"
   },
   "scripts": {
-    "dev": "fis3 release -d ./output",
-    "publish": "fis3 release -d ./output",
+    "dev": "fis3 release -wL -d ./output",
+    "publish": "fis3 release production -d ./output",
     "server": "fis3 server start -p 1088 --root ./output"
   },
   "author": "packy-tang <lpreterite@126.com>",

@@ -8,9 +8,18 @@
 <body>
     <section id="layout">
         <h1>{{ message }}</h1>
+        <p>userInfo: {{ userInfo.name }}</p>
         <test></test>
+        <div>
+            <h2>.icons use image sprite</h2>
+            <div class="icons icon-phone"></div>
+            <div class="icons icon-user"></div>
+            <div class="icons icon-code"></div>
+            <div class="icons icon-invitaion"></div>
+        </div>
     </section>
-    <script src="node_modules/requirejs/require.js"></script><!--ignore-->
+
+    <script src="node_modules/requirejs/require.js"></script>
     <script>
         require(['main']);
     </script>

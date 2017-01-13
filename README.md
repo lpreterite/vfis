@@ -1,49 +1,161 @@
 # vfis
 
-这个项目是把fis一些基础但是必须的功能结合到一齐的工具集。它包含：
+这个项目是把fis一些基础但是必须的功能结合到一齐的工具集。部分功能存在一些规则，具体请看下文的说明。工具集包含功能有：
 
-* 支持vue
-* 支持sass
-* autoprefixer兼容css
-* babel兼容es6
-* js依赖及引入
-* js文件合并
-* 图片合并
-* ~~图片压缩~~
-
-为了满足自动化需求必定存在一些新东西新概念需要消化，这些功能会在说明详细讲解。
-
-* 固定的目录规范
-* 三种环境的应用：部署、测试、线上环境
-* 模块化
-* js合并规范
+- [x] 支持vue
+- [x] 支持sass
+- [x] autoprefixer兼容css
+- [x] babel兼容es6
+- [x] js依赖及引入
+- [x] js文件合并
+- [x] 图片合并
+- [x] 图片压缩
 
 ## 说明
+此项目把部分功能进行了简单封装，只需简单修改配置就可以使用。其他配置细节未公开，如果对你影响比较大的可以写到issue。
 
-### 快速使用
+- 安装及使用
+- 输出设置
+- 模块化
+- 文件合并
+    - js文件合并
+    - 图片合并
+- 模拟数据接口
+- 使用场景
+    - 部署
+    - 测试
+- 使用建议
+    - 目录规范
+    - 资源引入
+    - js合并
+    - 图片合并
 
-### 设置
+### 安装及使用
 
-#### 目录规范
-
+#### 安装
 ```
-pages/             页面目录
-└ index            
-  ├ index.html
-  ├ main.js
-  └ main.scss
-fis-conf.js        vfis配置文件
+npm i -g vfis
+```
+> 由于依赖的各种库比较大，请耐心等待。
+
+#### 使用
+生成
+```
+vfis release -d ./output
 ```
 
-#### 环境的应用：部署、测试、线上环境
+生成并监控
+```
+vfis release -wL ./output
+```
 
-##### 部署环境
-##### 测试环境
-##### 线上环境
+预览
+```
+vfis server start --root ./output
+```
+
+> 更多使用移步到 [fis3 起步构建](http://fis.baidu.com/fis3/docs/beginning/release.html)
+
+
+#### 输出设置
+
+默认设置
+```
+fis.set('vfis.config', {
+    input: '**/(*.html)',       //访问的文件入口
+    output: {                   //输出文件目录及相关的设置
+        default: {
+            basePath: 'assets', //静态资源目录
+            pagePath: '',       //页面生成目录
+            url: '',            //静态资源访问的虚拟目录（指虚拟目录路径）
+            domain: '',         //静态资源访问的域（指网站访问域，如：http://uxfeel.com）
+        }
+    }
+})
+```
+
+**开发目录**
+```
+- src/
+  - imgs/
+  - index.html
+  - main.js
+  - main.scss
+- fis-conf.js
+```
+
+**生成目录**
+```
+- assets/
+  - src/
+    - imgs/
+    - main.js
+    - main.scss
+- index.html
+```
 
 #### 模块化
+模块化使用的是`fis3-hook-commonjs`与`fis3-hook-node_modules`
+目前模块使用`npm`安装，并可直接引用使用。例：
 
-#### 合并规范
+##### 使用
+```
+# 安装vue
+$ npm i -D vue
+
+# main.js
+const vue = require('vue');
+
+# or main.es6
+import vue from 'vue';
+```
+
+如出现*警告*提示缺少模块，请把缺失安装上就可以了。
+
+##### 自定义包访问别名
+只对js、css有效
+```
+# 目录`src/import`是需要直接访问时
+
+fis.set('vfis.config', {
+    modules: {
+        paths: {
+            'import': 'src/import'
+        }
+    }
+});
+```
+
+##### 自定义包信息
+提供给需要手动设置的包，如以下例子：
+```
+# fis-conf.js
+fis.set('vfis.config', {
+    modules: {
+        packages: [{
+            name: 'user',
+            location: 'src/user',
+            main: 'info.js'
+        }]
+    }
+});
+
+# main.js
+var userInfo = require('user');
+```
+
+##### 自定义依赖和暴露内容
+
+```
+# fis-conf.js
+fis.set('vfis.config', {
+    shim: {
+        deps: ['jquery'],                                     //依赖
+        exports: 'modal',                                     //暴露的对象名字
+        init: 'function($) {return $.extend({a: 1}, {b: 2})}' //暴露的可以通过自定的方法来控制。
+    }
+});
+```
 
 ## 运行环境
 ```

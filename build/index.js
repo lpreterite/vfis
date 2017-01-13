@@ -7,6 +7,7 @@ const utils = require('./utils');
 const defaults = require('./default.config');
 const options =  Object.assign({}, defaults, fis.get('vfis.config'));
 
+options.modules = Object.assign({}, defaults.modules, options.modules);
 options.ignore = options.ignore.concat(defaults.ignore);
 options.babel.presets =
     options.babel.presets ? 
@@ -55,7 +56,7 @@ fis.match('{**.js,**.es6,**.vue:js}', {
     preprocessor: [
       fis.plugin('js-require-css'),
       fis.plugin('js-require-file', {
-        useEmbedWhenSizeLessThan: 10 * 1024 // 小于10k用base64
+        useEmbedWhenSizeLessThan: 8 * 1024 // 小于10k用base64
       })
     ]
 });
@@ -98,7 +99,8 @@ fis.match('::package', {
         resourceType: 'amd',
         useInlineMap: true,
         allInOne: false
-    })
+    }),
+    spriter: fis.plugin('csssprites')
 });
 
 /** [production setting]============================================= */
@@ -131,7 +133,8 @@ fis.media('production').match('::package', {
             ignore: [].concat(pkg.ignore)
         }
     }),
-    packager: fis.plugin('deps-pack', pkg.packages)
+    packager: fis.plugin('deps-pack', pkg.packages),
+    spriter: fis.plugin('csssprites')
 });
 
 

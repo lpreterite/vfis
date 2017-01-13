@@ -1,3 +1,6 @@
 html,body{
     background-color: #f5f5f5;
 }
+html{
+    background-image: url(./imgs/bg.jpg);
+}

@@ -1,0 +1,20 @@
+.icons{
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background-repeat: no-repeat;
+    background-size: 36px;
+
+    &.icon-phone{
+        background-image: url('./imgs/icons/phone.png?__sprite');
+    }
+    &.icon-user{
+        background-image: url('./imgs/icons/user.png?__sprite');
+    }
+    &.icon-code{
+        background-image: url('./imgs/icons/code.png?__sprite');
+    }
+    &.icon-invitaion{
+        background-image: url('./imgs/icons/invitaion.png?__sprite');
+    }
+}
