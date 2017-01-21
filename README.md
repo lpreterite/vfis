@@ -7,20 +7,19 @@
 - [x] autoprefixer兼容css
 - [x] babel兼容es6
 - [x] js依赖及引入
-- [x] js文件合并
+- [x] 按需合并文件
 - [x] 图片合并
 - [x] 图片压缩
 
 ## 说明
-此项目把部分功能进行了简单封装，只需简单修改配置就可以使用。其他配置细节未公开，如果对你影响比较大的可以写到issue。
+此项目把部分功能进行了简单封装，只需简单修改配置就可以使用。其他配置细节未公开，如果对你影响比较大的可以写到issue，我会持续完善。
 
 - 安装及使用
 - 输出设置
 - 模块化
 - 文件合并
-    - js文件合并
     - 图片合并
-- 模拟数据接口
+- 数据模拟
 - 使用场景
     - 部署
     - 测试
@@ -157,12 +156,90 @@ fis.set('vfis.config', {
 });
 ```
 
+#### 文件合并
+能合并的文件有三类：js、css、图片，js及css合并单一文件有点过于暴力，这里提供自选文件合并方式，如：
+```
+fis.set('vfis.config', {
+    package: {
+        vendor: {
+            //key为合并后文件名字，value为需合并的文件的glob
+            'libs.js': ['node_modules/**'],
+            'pages.js': ['pages/**']
+        }
+    }
+)
+```
+
+##### 图片合并
+
+而图片合并指的是合并为雪碧图，vfis将同一个css文件下标有`__sprite`的图片合并到同一张雪碧图中。
+```
+# .icons
+/** 在css中你需要的图片后面加上`__sprite` */
+.icons{
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background-repeat: no-repeat;
+    background-size: 36px;
+
+    &.icon-phone{
+        background-image: url('./imgs/icons/phone.png?__sprite');
+    }
+    &.icon-user{
+        background-image: url('./imgs/icons/user.png?__sprite');
+    }
+    &.icon-code{
+        background-image: url('./imgs/icons/code.png?__sprite');
+    }
+    &.icon-invitaion{
+        background-image: url('./imgs/icons/invitaion.png?__sprite');
+    }
+}
+
+# vfis release
+/assets/icons.css   //icon样式
+/assets/icons_z.png //icon雪碧图
+```
+
+#### 数据模拟
+模仿数据接口需要在mock目录下添加相关配置，如下：
+
+在mock文件夹内添加`server.conf`路由配置及模拟数据文件`task.list.js`，生成后访问`http://127.0.0.1/api/tasks`就会获得你需要的模拟数据了。
+```
+# mock/server.conf
+//rewrite [正则路由] [对应路由文件]
+rewrite ^\/api\/tasks$ /mock/task.list.js
+
+# mock/task.list.js
+//类似express的处理
+module.exports = function(req, res, next) {
+    res.end(JSON.stringify({
+        [
+            {
+                id: 1,
+                title: "这是一个任务",
+                description: "",
+                complete: false,
+                tags: [],
+                createAt: 1467275476779,
+                updateAt: null,
+                deleteAt: null
+            },
+            ...
+        ]
+    }));
+};
+```
+
+#### 使用场景
+
+
 ## 运行环境
 ```
 node 4.4.x
 npm 3.10.x
 python 2.7.x
-fis3 3.3.12以上
 
 win系统还需 Microsoft Visual Studio 2010以上
 linux系统需要 c++运行环境
@@ -178,7 +255,7 @@ sudo npm update -g npm
 sudo npm install -g fis3
 ```
 
-## 安装依赖
+### 安装依赖
 命令行进入项目目录根
 ```
 npm i

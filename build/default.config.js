@@ -60,5 +60,9 @@ module.exports = exports.defaults = {
         output: 'pkg',
         vendor: {},
         ignore: []
+    },
+    mock: {
+        input: 'mock',
+        output: 'mock'
     }
 };

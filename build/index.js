@@ -7,7 +7,9 @@ const utils = require('./utils');
 const defaults = require('./default.config');
 const options =  Object.assign({}, defaults, fis.get('vfis.config'));
 
+options.mock = Object.assign({}, defaults.mock, options.mock);
 options.modules = Object.assign({}, defaults.modules, options.modules);
+options.modules.ignore = [].concat(options.modules.ignore, [path.posix.join(options.mock.input,'/**')]);
 options.ignore = options.ignore.concat(defaults.ignore);
 options.babel.presets =
     options.babel.presets ? 
@@ -103,6 +105,14 @@ fis.match('::package', {
     spriter: fis.plugin('csssprites')
 });
 
+// mock
+fis.match(path.posix.join(options.mock.input,'(**)'),{
+    release: path.posix.join(options.mock.output,'$1')
+});
+fis.match(path.posix.join(options.mock.input,'(server.conf)'),{
+    release: 'config/$1'
+});
+
 /** [production setting]============================================= */
 
 fis.media('production').match('**', {
@@ -110,7 +120,7 @@ fis.media('production').match('**', {
     domain: outputPro.domain,
     url: path.posix.join('/', outputPro.basePath, outputPro.url) + '$&' //改变引用地址
 });
-fis.match(options.input, {
+fis.media('production').match(options.input, {
     release: path.posix.join(outputPro.pagePath, "$1")
 });
 fis.media('production').match('{**.js,**.es6,**.vue:js}', {
@@ -120,6 +130,12 @@ fis.media('production').match('{**.js,**.es6,**.vue:js}', {
 fis.media('production').match('{**.css,**.scss,**.vue:css,**.vue:scss}', {
     useHash: true,
     optimizer: fis.plugin('clean-css')
+});
+fis.media('production').match(path.posix.join(options.mock.input,'**'),{
+    release: false
+});
+fis.media('production').match(path.posix.join(options.mock.input,'(server.conf)'),{
+    release: false
 });
 
 const pkg = utils.packages(options.pack);
@@ -155,6 +171,12 @@ fis.media('testing').match('{**.js,**.es6,**.vue:js}', {
 fis.media('testing').match('{**.css,**.scss,**.vue:css,**.vue:scss}', {
     useHash: true,
     optimizer: fis.plugin('clean-css')
+});
+fis.media('testing').match(path.posix.join(options.mock.input,'**'),{
+    release: false
+});
+fis.media('testing').match(path.posix.join(options.mock.input,'(server.conf)'),{
+    release: false
 });
 if(!!outputTes.push){
     //部署到测试机

@@ -2,7 +2,7 @@
 
 const build = require('../build');
 
-fis.set('vfis.config', { 
+fis.set('vfis.config', {
     ignore: ['*.js'],
     input: 'src/(*.html)',
     output: {
