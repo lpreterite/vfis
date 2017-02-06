@@ -14,5 +14,6 @@ cache:
 branches:
   only:
   - master
+  - develop
 sudo:
 - true
