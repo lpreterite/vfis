@@ -21,9 +21,9 @@ fis.set('vfis.config', options);
 fis.unhook('components');
 fis.hook('node_modules');
 
-const outputDef = options.output.default;
-const outputPro = Object.assign({}, options.output.default, options.output.production);
-const outputTes = Object.assign({}, options.output.default, options.output.testing);
+const outputDef = Object.assign({}, defaults.output.default, options.output.default);
+const outputPro = Object.assign({}, defaults.output.production, options.output.production);
+const outputTes = Object.assign({}, defaults.output.testing, options.output.testing);
 
 // 发布
 fis.match('**', {
@@ -31,6 +31,7 @@ fis.match('**', {
     domain: outputDef.domain,
     url: path.posix.join('/', outputDef.basePath, outputDef.url) + '$&', //改变引用地址
 });
+
 // 产出页面
 fis.match(options.input, {
     release: path.posix.join(outputDef.pagePath, outputDef.pageGlob)
