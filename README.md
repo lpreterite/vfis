@@ -1,5 +1,7 @@
 # vfis
 
+[![Build Status](https://travis-ci.org/lpreterite/vfis.svg?branch=master)](https://travis-ci.org/lpreterite/vfis)
+
 这个项目是把fis一些基础但是必须的功能结合到一齐的工具集。部分功能存在一些规则，具体请看下文的说明。工具集包含功能有：
 
 - [x] 支持vue
