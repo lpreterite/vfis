@@ -4,18 +4,21 @@ module.exports = exports.defaults = {
         default: {
             basePath: 'assets',
             pagePath: '',
+            pageGlob: '$1',
             url: '',
             domain: '',
         },
         production: {
             basePath: 'assets',
             pagePath: '',
+            pageGlob: '$1',
             url: '',
             domain: '',
         },
         testing: {
             basePath: 'assets',
             pagePath: '',
+            pageGlob: '$1',
             url: '',
             domain: '',
             push: {

@@ -11,7 +11,7 @@
 - [x] 图片合并
 - [x] 图片压缩
 
-## 说明
+# 说明
 此项目把部分功能进行了简单封装，只需简单修改配置就可以使用。其他配置细节未公开，如果对你影响比较大的可以写到issue，我会持续完善。
 
 - 安装及使用
@@ -23,15 +23,10 @@
 - 使用场景
     - 部署
     - 测试
-- 使用建议
-    - 目录规范
-    - 资源引入
-    - js合并
-    - 图片合并
 
-### 安装及使用
+## 安装及使用
 
-#### 安装
+### 安装
 ```
 npm i -g vfis
 ```
@@ -56,7 +51,7 @@ vfis server start --root ./output
 > 更多使用移步到 [fis3 起步构建](http://fis.baidu.com/fis3/docs/beginning/release.html)
 
 
-#### 输出设置
+### 输出设置
 
 默认设置
 ```
@@ -93,11 +88,11 @@ fis.set('vfis.config', {
 - index.html
 ```
 
-#### 模块化
-模块化使用的是`fis3-hook-commonjs`与`fis3-hook-node_modules`
-目前模块使用`npm`安装，并可直接引用使用。例：
+### 模块化
+模块化部分使用了`fis3-hook-commonjs`与`fis3-hook-node_modules`插件进行处理
+使用`npm`安装模块，便可直接引用使用。例如：
 
-##### 使用
+#### 使用
 ```
 # 安装vue
 $ npm i -D vue
@@ -109,9 +104,9 @@ const vue = require('vue');
 import vue from 'vue';
 ```
 
-如出现*警告*提示缺少模块，请把缺失安装上就可以了。
+如出现**警告**提示缺少模块，请把缺失模块安装上便可。
 
-##### 自定义包访问别名
+#### 自定义包访问别名
 只对js、css有效
 ```
 # 目录`src/import`是需要直接访问时
@@ -125,7 +120,7 @@ fis.set('vfis.config', {
 });
 ```
 
-##### 自定义包信息
+#### 自定义包信息
 提供给需要手动设置的包，如以下例子：
 ```
 # fis-conf.js
@@ -143,7 +138,7 @@ fis.set('vfis.config', {
 var userInfo = require('user');
 ```
 
-##### 自定义依赖和暴露内容
+#### 自定义依赖和暴露内容
 
 ```
 # fis-conf.js
@@ -156,13 +151,14 @@ fis.set('vfis.config', {
 });
 ```
 
-#### 文件合并
-能合并的文件有三类：js、css、图片，js及css合并单一文件有点过于暴力，这里提供自选文件合并方式，如：
+### 文件合并
+能合并的文件有三类：js、css、图片，js及css合并单一文件有点过于暴力，这里提供自选文件合并方式
+
+在vendor内以key为打包后文件名字，value为需合并的文件（支持[glob](https://github.com/isaacs/node-glob)）。
 ```
 fis.set('vfis.config', {
     package: {
         vendor: {
-            //key为合并后文件名字，value为需合并的文件的glob
             'libs.js': ['node_modules/**'],
             'pages.js': ['pages/**']
         }
@@ -170,9 +166,9 @@ fis.set('vfis.config', {
 )
 ```
 
-##### 图片合并
+#### 图片合并
 
-而图片合并指的是合并为雪碧图，vfis将同一个css文件下标有`__sprite`的图片合并到同一张雪碧图中。
+这里的图片合并指多张PNG图片合并为雪碧图，vfis将同一个css文件下标有`__sprite`的图片合并到同一张雪碧图中。
 ```
 # .icons
 /** 在css中你需要的图片后面加上`__sprite` */
@@ -202,7 +198,7 @@ fis.set('vfis.config', {
 /assets/icons_z.png //icon雪碧图
 ```
 
-#### 数据模拟
+### 数据模拟
 模仿数据接口需要在mock目录下添加相关配置，如下：
 
 在mock文件夹内添加`server.conf`路由配置及模拟数据文件`task.list.js`，生成后访问`http://127.0.0.1/api/tasks`就会获得你需要的模拟数据了。
@@ -232,7 +228,79 @@ module.exports = function(req, res, next) {
 };
 ```
 
-#### 使用场景
+### 使用场景
+一般使用时本地测试和线上部署的结构是一样的（或者要求本地必须与线上一样），从而达到能快速找到问题并解决。可是有些比较复杂的缘由又导致两个环境目录结构并不一致，如需求方未提前说明线上环境等。为不影响本地测试环境并生成满足线上环境的使用需求，根据不同的使用场景生成相对的结构是必须的，除了`default`外提供两个使用场景：`production`生成场景、`testing`测试场景，使用和`default`一致。
+
+#### 生产场景
+```
+fis.set('vfis.config', {
+    input: '**/(**)/(*).html',       
+    output: {                   
+        // 本地测试环境
+        default: {
+            basePath: 'assets', 
+            pagePath: '',       
+            pageGlob: '$2.html',  
+        },
+        // 生产环境
+        // 参考laravel目录结构
+        production: {
+            basePath: 'public/assets', 
+            pagePath: 'views',
+            pageGlob: '$1/$2.tpl',     
+        }
+    }
+})
+```
+
+生成目录
+```
+# 本地测试环境 $ vfis release
+- assets/
+    - src/
+        - imgs/
+        - main.js
+        - main.scss
+- index.html
+
+
+# 生产环境 $ vfis release production
+- public/
+    - assets/
+        - src/
+            - imgs/
+            - main.js
+            - main.scss
+- views/
+    - index
+        - index.tpl
+```
+
+#### 测试场景
+测试场景多了一个额外功能：推送
+```
+fis.set('vfis.config', {
+    input: '**/(**)/(*).html',       
+    output: {                   
+        // 本地测试环境
+        default: {
+            basePath: 'assets', 
+            pagePath: '',       
+            pageGlob: '$2.html',    
+        },
+        testing: {
+            basePath: 'public/assets', 
+            pagePath: 'views',
+            pageGlob: '$1/$2.tpl',
+            //推送到服务器
+            push: {
+                receiver: 'http://192.168.1.220:8999/receiver',
+                dir: '/www/test/t1/'
+            }
+        }
+});
+```
+服务器需搭建接收服务，fis官方给出的[node端接收服务代码](https://github.com/fex-team/receiver)和[php端接收代码](https://github.com/fex-team/fis-command-release/blob/master/tools/receiver.php)
 
 
 ## 运行环境

@@ -33,7 +33,7 @@ fis.match('**', {
 });
 // 产出页面
 fis.match(options.input, {
-    release: path.posix.join(outputDef.pagePath, "$1")
+    release: path.posix.join(outputDef.pagePath, outputDef.pageGlob)
 });
 
 // vue
@@ -121,7 +121,7 @@ fis.media('production').match('**', {
     url: path.posix.join('/', outputPro.basePath, outputPro.url) + '$&' //改变引用地址
 });
 fis.media('production').match(options.input, {
-    release: path.posix.join(outputPro.pagePath, "$1")
+    release: path.posix.join(outputPro.pagePath, outputPro.pageGlob)
 });
 fis.media('production').match('{**.js,**.es6,**.vue:js}', {
     useHash: true,
@@ -162,7 +162,7 @@ fis.media('testing').match('**', {
     url: path.posix.join('/', outputTes.basePath, outputTes.url) + '$&' //改变引用地址
 });
 fis.media('testing').match(options.input, {
-    release: path.posix.join(outputTes.pagePath, "$1")
+    release: path.posix.join(outputTes.pagePath, outputTes.pageGlob)
 });
 fis.media('testing').match('{**.js,**.es6,**.vue:js}', {
     useHash: true,
