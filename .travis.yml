@@ -1,0 +1,18 @@
+language: node_js
+os:
+- linux
+node_js:
+- '0.10'
+- '0.12'
+- '4'
+- '6'
+install:
+- npm install
+cache:
+  directories:
+  - node_modules
+branches:
+  only:
+  - master
+sudo:
+- true
