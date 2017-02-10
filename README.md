@@ -159,7 +159,7 @@ fis.set('vfis.config', {
 在vendor内以key为打包后文件名字，value为需合并的文件（支持[glob](https://github.com/isaacs/node-glob)）。
 ```
 fis.set('vfis.config', {
-    package: {
+    pack: {
         vendor: {
             'libs.js': ['node_modules/**'],
             'pages.js': ['pages/**']
