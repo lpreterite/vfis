@@ -20,9 +20,9 @@ fis.set('vfis.config', {
             main: 'info.js'
         }]
     },
-    package: {
+    pack: {
         vendor: {
-            'require.js': ['node_modules/requirejs/**']
+            'vender.js': ['node_modules/requirejs/**','node_modules/lib-flexible/**']
         }
     }
 });
