@@ -5,5 +5,6 @@ fis.require.prefixes.unshift('vfis');
 fis.cli.name = 'vfis';
 fis.cli.info = require('./package.json');
 
-const build = require('./build');
+const build = require('../build');
+
 build();
