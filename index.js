@@ -8,3 +8,6 @@ fis.cli.info = require('./package.json');
 const build = require('./build');
 
 build();
+
+module.exports.build = build;
+module.exports.pithy = build.pithy;
