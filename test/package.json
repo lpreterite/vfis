@@ -2,7 +2,7 @@
   "name": "fis-example",
   "version": "1.0.0",
   "description": "",
-  "main": "fis-conf.js",
+  "main": "index.js",
   "dependencies": {
     "bluebird": "^3.4.7",
     "lib-flexible": "^0.3.2",
