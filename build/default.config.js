@@ -38,7 +38,8 @@ module.exports = exports.defaults = {
         'build/**',
         'tests/**',
         'output/**',
-        'dist/**'
+        'dist/**',
+        'cache/**'
     ],
     babel: {
         postfix: ['es6','vue:js']
