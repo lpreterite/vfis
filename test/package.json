@@ -2,7 +2,7 @@
   "name": "fis-example",
   "version": "1.0.0",
   "description": "",
-  "main": "fis-conf.js",
+  "main": "index.js",
   "dependencies": {
     "bluebird": "^3.4.7",
     "lib-flexible": "^0.3.2",
@@ -28,9 +28,9 @@
     "fis3-preprocessor-js-require-css": "^0.1.1"
   },
   "scripts": {
-    "dev": "fis3 release -wL -d ./output",
-    "publish": "fis3 release production -d ./output",
-    "server": "fis3 server start -p 1088 --root ./output"
+    "dev": "node ../bin/vfis release -wL -d ./output",
+    "publish": "node ../bin/vfis release production -d ./dist",
+    "server": "node ../bin/vfis server start -p 1088 --root ./output"
   },
   "author": "packy-tang <lpreterite@126.com>",
   "license": "MIT"

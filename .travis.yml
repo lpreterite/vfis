@@ -9,6 +9,7 @@ before_install:
 - sudo apt-get install python
 install:
 - npm install
+- cd ./test && npm install && cd ../
 cache:
   directories:
   - node_modules

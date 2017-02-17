@@ -1,10 +1,10 @@
 {
-  "name": "vfis",
+  "name": "vfis-cli",
   "version": "1.0.0",
   "description": "The make fis3 to support vue、es6 and make it more easy !",
   "main": "index.js",
   "scripts": {
-    "test": "fis3 release -d ./test/output -f ./test/fis-conf.js"
+    "test": "mocha -u tdd test/index.js"
   },
   "bin": {
     "vfis": "bin/vfis.js"
@@ -35,5 +35,10 @@
     "fis3-postprocessor-autoprefixer": "^1.0.0",
     "fis3-preprocessor-js-require-css": "^0.1.1",
     "fis3-preprocessor-js-require-file": "^0.1.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "mocha": "^3.2.0"
   }
 }

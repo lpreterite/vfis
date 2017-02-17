@@ -40,3 +40,5 @@ jspm_packages
 
 test/node_modules
 test/output
+test/dist
+test/cache

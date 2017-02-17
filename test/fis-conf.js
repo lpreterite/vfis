@@ -1,8 +1,8 @@
 'use strict';
 
-const build = require('../build');
+const vfis = require('../build');
 
-fis.set('vfis.config', {
+vfis({
     ignore: ['*.js'],
     input: 'src/(*.html)',
     output: {
@@ -27,4 +27,7 @@ fis.set('vfis.config', {
     }
 });
 
-build();
+fis.match('**.png', {
+  // fis-optimizer-png-compressor 插件进行压缩，已内置
+  optimizer: fis.plugin('png-compressor', {type : 'pngquant'})
+});

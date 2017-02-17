@@ -38,10 +38,11 @@ module.exports = exports.defaults = {
         'build/**',
         'tests/**',
         'output/**',
-        'dist/**'
+        'dist/**',
+        'cache/**'
     ],
     babel: {
-        postfix: ['es6']
+        postfix: ['es6','vue:js']
     },
     autoprefixer: {
         "browsers":  ["> 5%", "last 2 versions"],
