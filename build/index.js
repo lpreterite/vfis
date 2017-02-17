@@ -4,7 +4,7 @@ const path = require('path');
 const utils = require('./utils');
 const defaults = require('./default.config');
 
-module.exports = exports.default = function(){
+function build(){
 
     fis.set('project.ignore', [].concat(fis.get('project.ignore'), defaults.ignore));
 
@@ -76,7 +76,7 @@ module.exports = exports.default = function(){
 
 };
 
-module.exports.pithy = function(config){
+function pithy(config){
     const options =  Object.assign({}, defaults, config);
 
     options.mock = Object.assign({}, defaults.mock, options.mock);
@@ -215,3 +215,12 @@ module.exports.pithy = function(config){
         });
     }
 };
+
+
+
+module.exports = exports.default = function(config){
+    build();
+    pithy(config);
+};
+module.exports.base = build;
+module.exports.pithy = pithy;

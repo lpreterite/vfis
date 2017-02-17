@@ -1,11 +1,8 @@
 'use strict';
 
-const build = require('../build'),
-      pithy = require('../build').pithy; //22134
+const vfis = require('../build');
 
-build();
-
-pithy({
+vfis({
     ignore: ['*.js'],
     input: 'src/(*.html)',
     output: {
