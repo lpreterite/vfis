@@ -8,7 +8,7 @@ var path = require('path');
 var cli = new Liftoff({
   name: 'vfis', // 命令名字
   processTitle: 'vfis',
-  moduleName: 'vfis',
+  moduleName: 'vfis-cli',
   configName: 'fis-conf',
 
   // only js supported!
